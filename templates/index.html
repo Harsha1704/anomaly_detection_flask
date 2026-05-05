@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}AnomalyAI — ML Anomaly Detection Platform{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-badge">⚡ ML-Powered &nbsp;·&nbsp; Real-time Detection</div>
+  <h1 class="fade-up">
+    Detect Hidden Anomalies<br>
+    <span class="gradient-text">with Machine Learning</span>
+  </h1>
+  <p class="fade-up delay-1">
+    Upload any CSV dataset, choose numeric features, and let Isolation Forest
+    or One-Class SVM surface the outliers — with interactive charts, stats, and
+    a downloadable labelled output.
+  </p>
+  <div class="hero-actions fade-up delay-2">
+    <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg">Upload Dataset →</a>
+    <a href="{{ url_for('about') }}"  class="btn btn-secondary btn-lg">Learn More</a>
+  </div>
+</section>
+
+<!-- ── Stats Row ─────────────────────────────────────────────── -->
+<div class="container">
+  <div class="metric-grid fade-up delay-3">
+    <div class="metric-card" style="--metric-color:#38bdf8">
+      <div class="metric-label">Algorithms</div>
+      <div class="metric-value">3</div>
+      <div class="metric-sub">IF · OC-SVM · LOF</div>
+      <div class="metric-icon">🤖</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#34d399">
+      <div class="metric-label">Max Upload</div>
+      <div class="metric-value">16MB</div>
+      <div class="metric-sub">CSV files supported</div>
+      <div class="metric-icon">📂</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#a78bfa">
+      <div class="metric-label">Chart Types</div>
+      <div class="metric-value">4</div>
+      <div class="metric-sub">Scatter · Line · Pie · Dist.</div>
+      <div class="metric-icon">📊</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#fbbf24">
+      <div class="metric-label">Output</div>
+      <div class="metric-value">CSV</div>
+      <div class="metric-sub">Labelled & downloadable</div>
+      <div class="metric-icon">⬇️</div>
+    </div>
+  </div>
+
+  <!-- ── How It Works ───────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-title">How It Works</div>
+    <div class="section-sub">Four steps from raw data to labelled anomaly output</div>
+
+    <div class="grid-2">
+      <div class="card fade-up">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h4>1 · Upload CSV Dataset</h4>
+            <p>Drag and drop any CSV file. The system auto-detects numeric columns and shows a preview.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h4>2 · Configure Detection</h4>
+            <p>Select feature columns, choose an algorithm (Isolation Forest, One-Class SVM, or LOF), and set contamination ratio.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h4>3 · Run & Visualise</h4>
+            <p>Model trains on scaled features. Results are shown instantly with scatter, line, pie, and distribution charts.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <h4>4 · Download Output</h4>
+            <p>Get the original data enriched with <code>Prediction</code> (-1/1) and <code>Status</code> (Anomaly/Normal) columns.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card fade-up delay-2">
+        <div class="card-title" style="margin-bottom:1.2rem;">✨ Key Features</div>
+        <ul class="feature-list">
+          <li>
+            <span class="fi">🔍</span>
+            <div><strong>Isolation Forest (default)</strong><span>High-accuracy tree-based anomaly detection. Scales well to large datasets.</span></div>
+          </li>
+          <li>
+            <span class="fi">🧮</span>
+            <div><strong>One-Class SVM & LOF</strong><span>Alternative algorithms selectable per use case.</span></div>
+          </li>
+          <li>
+            <span class="fi">📈</span>
+            <div><strong>Interactive Charts</strong><span>Chart.js-powered scatter, line, doughnut, and histogram views.</span></div>
+          </li>
+          <li>
+            <span class="fi">⬇️</span>
+            <div><strong>Labelled CSV Export</strong><span>Download results with Status and Prediction columns appended.</span></div>
+          </li>
+          <li>
+            <span class="fi">🎓</span>
+            <div><strong>Viva Guide</strong><span>Built-in Q&A to help you explain the project in interviews.</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA ────────────────────────────────────────────────── -->
+  <div class="card fade-up" style="text-align:center;padding:3rem 2rem;background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(56,189,248,0.07),transparent);margin-bottom:3rem;">
+    <div style="font-size:2.5rem;margin-bottom:1rem;">🚀</div>
+    <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:800;margin-bottom:0.6rem;">
+      Ready to find anomalies?
+    </h3>
+    <p style="color:var(--text-secondary);max-width:440px;margin:0 auto 2rem;">
+      Download the sample industrial sensor dataset or upload your own CSV to get started in seconds.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload My Dataset</a>
+      <a href="{{ url_for('sample_download') }}" class="btn btn-secondary">⬇ Sample Dataset</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

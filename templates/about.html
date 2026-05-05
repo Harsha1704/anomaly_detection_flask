@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}About Project — AnomalyAI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › About Project</div>
+    <h2>About This Project</h2>
+    <p>Anomaly Detection using Machine Learning — LPU Edu Revolution Submission</p>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:2rem;">
+    <div class="card fade-up">
+      <div class="card-title" style="margin-bottom:1.2rem;">🎯 Problem Statement</div>
+      <p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.8;margin-bottom:1rem;">
+        In large-scale systems such as industrial machinery, financial transactions, and network
+        traffic, manually identifying abnormal patterns is infeasible at scale. Traditional
+        threshold-based rules fail to capture complex multi-variate anomalies.
+      </p>
+      <p style="color:var(--text-secondary);font-size:0.92rem;line-height:1.8;">
+        This project provides an automated, ML-driven pipeline that can detect anomalies in any
+        tabular CSV dataset without requiring labelled training data (unsupervised learning).
+      </p>
+    </div>
+
+    <div class="card fade-up delay-1">
+      <div class="card-title" style="margin-bottom:1.2rem;">🏗️ Tech Stack</div>
+      <ul class="feature-list">
+        <li><span class="fi">🐍</span><div><strong>Python 3.11+</strong><span>Core language for all backend logic.</span></div></li>
+        <li><span class="fi">🌐</span><div><strong>Flask 3</strong><span>Lightweight web framework for routing and templates.</span></div></li>
+        <li><span class="fi">🧮</span><div><strong>Scikit-learn</strong><span>IsolationForest, OneClassSVM, LocalOutlierFactor, StandardScaler.</span></div></li>
+        <li><span class="fi">🐼</span><div><strong>Pandas + NumPy</strong><span>Data loading, validation, and preprocessing.</span></div></li>
+        <li><span class="fi">📊</span><div><strong>Chart.js 4</strong><span>Interactive scatter, line, pie, and histogram charts.</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Objectives -->
+  <div class="card fade-up" style="margin-bottom:2rem;">
+    <div class="card-title" style="margin-bottom:1.2rem;">📌 Project Objectives</div>
+    <div class="grid-3">
+      {% set objectives = [
+        ("🔍","Unsupervised Detection","Detect anomalies in unlabelled datasets without prior class information."),
+        ("📂","Universal CSV Input","Accept any CSV with numeric columns — sensors, finance, health, logs."),
+        ("⚡","Multi-Algorithm Support","Compare Isolation Forest, One-Class SVM, and LOF on the same data."),
+        ("📊","Interactive Visualisation","Four chart types for intuitive result interpretation."),
+        ("⬇️","Downloadable Output","Export labelled CSV with Prediction and Status columns appended."),
+        ("🎓","Educational Value","Viva guide, code comments, and README for academic submission."),
+      ] %}
+      {% for icon, title, desc in objectives %}
+      <div style="padding:1rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-sm);">
+        <div style="font-size:1.4rem;margin-bottom:.5rem;">{{ icon }}</div>
+        <div style="font-weight:700;font-size:.9rem;margin-bottom:.3rem;">{{ title }}</div>
+        <div style="font-size:.82rem;color:var(--text-secondary);">{{ desc }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Folder structure -->
+  <div class="card fade-up delay-1" style="margin-bottom:2rem;">
+    <div class="card-title" style="margin-bottom:1rem;">📁 Project Structure</div>
+    <div class="code-block">
+<span class="cmt">anomaly_detection_flask/</span>
+├── <span class="kw">app.py</span>               <span class="cmt"># Flask routes & app entry point</span>
+├── requirements.txt
+├── README.md
+├── <span class="kw">data/</span>
+│   ├── uploads/         <span class="cmt"># Raw uploaded CSVs</span>
+│   ├── processed/       <span class="cmt"># Labelled output CSVs</span>
+│   └── sample_anomaly_dataset.csv
+├── <span class="kw">static/</span>
+│   ├── css/style.css
+│   └── js/dashboard.js
+├── <span class="kw">templates/</span>
+│   ├── base.html
+│   ├── index.html  upload.html  dashboard.html
+│   ├── results.html  analytics.html
+│   ├── about.html  viva.html
+└── <span class="kw">utils/</span>
+    ├── detector.py      <span class="cmt"># ML detection logic</span>
+    ├── data_handler.py  <span class="cmt"># CSV utilities</span>
+    └── visualizer.py    <span class="cmt"># Chart data helpers</span>
+    </div>
+  </div>
+
+  <!-- Future Scope -->
+  <div class="card fade-up delay-2" style="margin-bottom:3rem;">
+    <div class="card-title" style="margin-bottom:1.2rem;">🚀 Future Enhancements</div>
+    <ul class="feature-list">
+      <li><span class="fi">🔁</span><div><strong>Real-time Streaming</strong><span>Integrate Kafka or WebSocket to detect anomalies on live data streams.</span></div></li>
+      <li><span class="fi">🧠</span><div><strong>Deep Learning Models</strong><span>Autoencoder-based anomaly detection for complex pattern recognition.</span></div></li>
+      <li><span class="fi">🗃️</span><div><strong>Database Storage</strong><span>Store results in SQLite/PostgreSQL for history, trends, and comparison.</span></div></li>
+      <li><span class="fi">📧</span><div><strong>Alert System</strong><span>Email/Slack alerts when anomaly rate exceeds a configurable threshold.</span></div></li>
+      <li><span class="fi">🌍</span><div><strong>REST API</strong><span>Expose detection as a REST endpoint for integration with other systems.</span></div></li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

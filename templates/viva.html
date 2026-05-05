@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Viva Guide — AnomalyAI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › Viva Guide</div>
+    <h2>🎓 Viva Preparation Guide</h2>
+    <p>Everything you need to confidently explain this project in interviews, presentations, and vivas.</p>
+  </div>
+
+  <!-- Quick intro script -->
+  <div class="card fade-up" style="margin-bottom:2rem;background:radial-gradient(ellipse 80% 120% at 50% 0%,rgba(56,189,248,0.07),transparent);">
+    <div class="card-title" style="margin-bottom:1rem;">🗣️ 60-Second Project Introduction Script</div>
+    <blockquote style="border-left:3px solid var(--cyan);padding-left:1.2rem;color:var(--text-secondary);font-size:0.92rem;line-height:1.8;font-style:italic;">
+      "My project is an Anomaly Detection System built using Python and Flask. It allows users to upload any CSV dataset,
+      select numeric feature columns, and automatically detect anomalies using unsupervised machine learning algorithms
+      like Isolation Forest, One-Class SVM, and Local Outlier Factor. The system preprocesses the data using StandardScaler,
+      trains the model, and outputs each record labelled as Normal or Anomaly. It also generates interactive charts —
+      scatter plots, line charts, pie charts, and histograms — to help visualise the results. The final labelled CSV can
+      be downloaded for further analysis. I built this to demonstrate real-world applications of ML in fields like
+      predictive maintenance, fraud detection, and network security."
+    </blockquote>
+  </div>
+
+  <!-- Q&A Accordion -->
+  <div class="section-title fade-up">Common Viva Questions</div>
+  <div class="section-sub fade-up">Click any question to expand the answer.</div>
+
+  <div class="accordion fade-up" style="margin-bottom:3rem;">
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What is anomaly detection? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Anomaly detection (also called outlier detection) is the process of identifying data points, events, or observations
+        that deviate significantly from the expected behaviour of a dataset. These deviations are called anomalies or outliers.
+        It is used in fraud detection, network intrusion detection, industrial fault detection, medical diagnosis, and more.
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What is Isolation Forest and why did you choose it? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Isolation Forest is an unsupervised ML algorithm introduced by Liu et al. (2008). It works on the principle that
+        anomalies are "few and different" — they are easier to isolate in a random tree structure. The algorithm builds an
+        ensemble of isolation trees; anomalies require fewer splits to be isolated, resulting in a shorter average path
+        length. It assigns an anomaly score based on this path length. I chose it because:
+        <ul style="margin-top:.6rem;padding-left:1.2rem;display:grid;gap:4px;">
+          <li>It is efficient on large, high-dimensional datasets (O(n log n)).</li>
+          <li>It does not require a distance or density measure.</li>
+          <li>It handles mixed-type features well with a contamination parameter.</li>
+          <li>It is the industry standard for general-purpose anomaly detection.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What is the contamination parameter? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        The contamination parameter tells the algorithm the expected proportion of anomalies in the dataset. For example,
+        contamination=0.05 means we expect 5% of records to be anomalies. The model uses this to set the decision threshold
+        on the anomaly score. If you do not know the exact proportion, 0.05 is a safe default for most real-world datasets.
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        Why do you use StandardScaler? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        StandardScaler transforms each feature to have zero mean and unit variance. This is important because:
+        <ul style="margin-top:.6rem;padding-left:1.2rem;display:grid;gap:4px;">
+          <li>Features with large value ranges (e.g. Pressure: 80–200) can dominate those with small ranges (e.g. Vibration: 0.1–3.0).</li>
+          <li>While Isolation Forest is scale-invariant for a single feature, multi-feature detection benefits from normalisation.</li>
+          <li>One-Class SVM and LOF are explicitly distance/density-based and require scaling.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What does the output -1 and 1 mean? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Scikit-learn's convention for anomaly detection models:
+        <ul style="margin-top:.6rem;padding-left:1.2rem;display:grid;gap:4px;">
+          <li><strong>1</strong> = Normal (inlier) — the data point fits the expected distribution.</li>
+          <li><strong>-1</strong> = Anomaly (outlier) — the data point deviates significantly from the normal pattern.</li>
+        </ul>
+        In the output CSV, the <code>Prediction</code> column stores these raw values, and the <code>Status</code> column
+        converts them to the human-readable "Normal" / "Anomaly" labels.
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What are the real-world applications of anomaly detection? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul style="padding-left:1.2rem;display:grid;gap:6px;">
+          <li><strong>Predictive Maintenance</strong> — Detect sensor anomalies in machinery before equipment failure.</li>
+          <li><strong>Fraud Detection</strong> — Flag unusual credit card transactions or bank transfers.</li>
+          <li><strong>Network Security</strong> — Identify unusual traffic patterns suggesting a cyber attack.</li>
+          <li><strong>Healthcare</strong> — Detect abnormal patient vitals (heart rate, blood pressure).</li>
+          <li><strong>E-Commerce</strong> — Spot fake reviews, bot traffic, or unusual purchase behaviour.</li>
+          <li><strong>Quality Control</strong> — Identify defective products on a manufacturing line.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        How does Local Outlier Factor (LOF) work? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        LOF compares the local density of a data point to the density of its k nearest neighbours. A point with a much
+        lower density than its neighbours (LOF score &gt; 1) is considered an outlier. It is density-based and effective
+        when anomalies form clusters or when the data has varying density regions. It is computationally more expensive
+        than Isolation Forest for large datasets.
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        How does One-Class SVM work? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        One-Class SVM learns a decision boundary that encloses the "normal" region of the feature space using a kernel
+        function (usually RBF). Any point outside this boundary is labelled an anomaly. The <code>nu</code> parameter
+        controls the upper bound on the fraction of training errors and the lower bound on the support vector fraction.
+        It works best on small to medium datasets where the normal class is well-defined.
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What is the project workflow? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ol style="padding-left:1.2rem;display:grid;gap:6px;">
+          <li>User uploads a CSV via the upload page.</li>
+          <li><code>data_handler.py</code> validates the file, loads it into a Pandas DataFrame, and detects numeric columns.</li>
+          <li>A dataset preview (first 8 rows) is shown on the dashboard.</li>
+          <li>User selects feature columns, algorithm, and contamination rate.</li>
+          <li><code>detector.py</code> applies StandardScaler, trains the selected model, and generates predictions and anomaly scores.</li>
+          <li>Results are stored in Flask session and the labelled CSV is saved to <code>data/processed/</code>.</li>
+          <li>Charts (scatter, line, pie, histogram) are built using Chart.js with JSON data from Flask routes.</li>
+          <li>User downloads the output CSV.</li>
+        </ol>
+      </div></div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header">
+        What improvements could be made to this project? <span class="arrow">▼</span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul style="padding-left:1.2rem;display:grid;gap:6px;">
+          <li>Add deep learning models (Autoencoder, LSTM) for time-series anomaly detection.</li>
+          <li>Integrate real-time streaming with WebSockets or Kafka.</li>
+          <li>Add user authentication and a history/dashboard for multiple runs.</li>
+          <li>Use a database (SQLite/PostgreSQL) to persist results across sessions.</li>
+          <li>Expose a REST API for integration with IoT platforms or dashboards like Grafana.</li>
+          <li>Add SHAP-based feature importance to explain why a record is flagged as anomalous.</li>
+        </ul>
+      </div></div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

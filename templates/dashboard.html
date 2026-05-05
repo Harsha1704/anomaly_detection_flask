@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AnomalyAI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › Dashboard</div>
+    <h2>Configure Detection</h2>
+    <p>Select feature columns, choose an algorithm, and run anomaly detection on your dataset.</p>
+  </div>
+
+  <!-- Dataset Preview -->
+  {% if preview %}
+  <div class="card fade-up" style="margin-bottom:2rem;">
+    <div class="card-header">
+      <div class="card-title">👁 Dataset Preview</div>
+      <div class="pill-row" style="margin:0;">
+        <div class="pill"><div class="dot"></div>{{ preview.total_rows }} rows</div>
+        <div class="pill"><div class="dot" style="background:var(--coral)"></div>{{ preview.total_cols }} columns</div>
+        <div class="pill"><div class="dot" style="background:var(--green)"></div>{{ numeric_cols|length }} numeric</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>{% for col in preview.columns %}<th>{{ col }}</th>{% endfor %}</tr>
+        </thead>
+        <tbody>
+          {% for row in preview.rows %}
+          <tr>{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.75rem;">Showing first 8 rows of {{ preview.total_rows }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Detection Config Form -->
+  <form method="POST" id="detectionForm" action="{{ url_for('dashboard') }}">
+    <div class="grid-2">
+      <!-- Column selector -->
+      <div class="card fade-up">
+        <div class="card-header">
+          <div class="card-title">📌 Select Feature Columns</div>
+          <span class="badge badge-info">Multi-select</span>
+        </div>
+        <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1rem;">
+          Choose one or more numeric columns to use as features for anomaly detection.
+        </p>
+        <div class="checkbox-group">
+          {% for col in numeric_cols %}
+          <label class="checkbox-item">
+            <input type="checkbox" name="columns" value="{{ col }}" {% if loop.index <= 4 %}checked{% endif %}>
+            <span>{{ col }}</span>
+          </label>
+          {% endfor %}
+        </div>
+        {% if not numeric_cols %}
+        <div class="flash-msg flash-danger">No numeric columns found in the dataset.</div>
+        {% endif %}
+      </div>
+
+      <!-- Algorithm settings -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem;">
+        <div class="card fade-up delay-1">
+          <div class="card-header">
+            <div class="card-title">🤖 Algorithm</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Detection Algorithm</label>
+            <select name="algorithm" class="form-control form-select">
+              {% for key, label in algorithms.items() %}
+              <option value="{{ key }}" {% if key == 'isolation_forest' %}selected{% endif %}>{{ label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label">Contamination Rate
+              <span style="color:var(--text-muted);font-weight:400;text-transform:none;">(expected % of anomalies)</span>
+            </label>
+            <div class="range-row">
+              <input type="range" id="contamination" name="contamination" min="0.01" max="0.5" step="0.01" value="0.05" style="flex:1;">
+              <div class="range-val" id="contamValue">0.05</div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin-top:0.4rem;">
+              0.05 = 5% anomalies expected (recommended default)
+            </p>
+          </div>
+        </div>
+
+        <div class="card fade-up delay-2">
+          <div class="card-title" style="margin-bottom:1rem;">⚙️ Algorithm Info</div>
+          <ul class="feature-list">
+            <li><span class="fi">🌲</span><div><strong>Isolation Forest</strong><span>Best for general-purpose detection. Fast, scalable, robust.</span></div></li>
+            <li><span class="fi">📐</span><div><strong>One-Class SVM</strong><span>Boundary-based. Good for small datasets with clear separation.</span></div></li>
+            <li><span class="fi">🔵</span><div><strong>LOF</strong><span>Density-based. Finds local outliers compared to neighbours.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;gap:12px;flex-wrap:wrap;" class="fade-up">
+      <button type="submit" class="btn btn-primary btn-lg">
+        ⚡ Run Anomaly Detection
+      </button>
+      <a href="{{ url_for('upload') }}" class="btn btn-secondary">← Upload New File</a>
+      <a href="{{ url_for('reset') }}" class="btn btn-danger btn-sm" style="align-self:center;">🔄 Reset</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

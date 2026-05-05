@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block title %}Analytics — AnomalyAI{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › Analytics</div>
+    <h2>Deep Analytics</h2>
+    <p>Expanded visualisations for the last detection run.</p>
+  </div>
+
+  {% if not summary %}
+  <div class="card fade-up" style="text-align:center;padding:4rem 2rem;">
+    <div style="font-size:3rem;margin-bottom:1rem;">📊</div>
+    <h3 style="font-family:var(--font-display);margin-bottom:0.5rem;">No results yet</h3>
+    <p style="color:var(--text-secondary);margin-bottom:1.5rem;">Run anomaly detection first to see analytics.</p>
+    <a href="{{ url_for('upload') }}" class="btn btn-primary">Upload Dataset →</a>
+  </div>
+  {% else %}
+
+  <!-- Summary row -->
+  <div class="metric-grid fade-up">
+    <div class="metric-card" style="--metric-color:#38bdf8">
+      <div class="metric-label">Total Records</div>
+      <div class="metric-value">{{ summary.total_rows }}</div>
+      <div class="metric-icon">📊</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#34d399">
+      <div class="metric-label">Normal</div>
+      <div class="metric-value">{{ summary.normal_count }}</div>
+      <div class="metric-icon">✅</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#fb7185">
+      <div class="metric-label">Anomalies</div>
+      <div class="metric-value">{{ summary.anomaly_count }}</div>
+      <div class="metric-icon">🚨</div>
+    </div>
+    <div class="metric-card" style="--metric-color:#fbbf24">
+      <div class="metric-label">Anomaly Rate</div>
+      <div class="metric-value">{{ summary.anomaly_percentage }}%</div>
+      <div class="metric-icon">📉</div>
+    </div>
+  </div>
+
+  <!-- Full-width charts -->
+  <div class="card fade-up" style="margin-bottom:1.5rem;">
+    <div class="card-header"><div class="card-title">📈 Anomaly Score — Full Sequence</div></div>
+    <div class="chart-wrap"><canvas id="lineChartFull" height="140"></canvas></div>
+  </div>
+
+  <div class="grid-2 fade-up delay-1" style="margin-bottom:1.5rem;">
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔵 Scatter — Feature Space</div></div>
+      <div class="chart-wrap"><canvas id="scatterFull" height="280"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🍩 Proportion</div></div>
+      <div class="chart-wrap"><canvas id="pieFull" height="280"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Distribution for all available columns -->
+  <div class="card fade-up delay-2" style="margin-bottom:2rem;">
+    <div class="card-header"><div class="card-title">📊 Feature Distributions</div></div>
+    <div id="distContainer" class="grid-2"></div>
+  </div>
+
+  <!-- Algorithm Comparison Info -->
+  <div class="card fade-up delay-3" style="margin-bottom:3rem;">
+    <div class="card-header">
+      <div class="card-title">🤖 Algorithm Used: {{ summary.algorithm_used }}</div>
+      <span class="badge badge-info">Contamination: {{ summary.contamination }}</span>
+    </div>
+    <div class="grid-3" style="margin-top:0.5rem;">
+      <div style="padding:1rem;background:var(--bg-surface);border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:.4rem;">Features Used</div>
+        <div class="pill-row" style="margin:0;">
+          {% for col in summary.columns_used %}
+          <div class="pill"><div class="dot"></div>{{ col }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      <div style="padding:1rem;background:var(--bg-surface);border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:.4rem;">Preprocessing</div>
+        <div style="font-size:0.88rem;color:var(--text-secondary);">StandardScaler (zero mean, unit variance)</div>
+      </div>
+      <div style="padding:1rem;background:var(--bg-surface);border-radius:var(--radius-sm);border:1px solid var(--border);">
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:.4rem;">Output Labels</div>
+        <div style="font-size:0.88rem;color:var(--text-secondary);">1 = Normal &nbsp;·&nbsp; -1 = Anomaly</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;margin-bottom:3rem;" class="fade-up">
+    <a href="{{ url_for('results') }}" class="btn btn-secondary">← Back to Results</a>
+    <a href="{{ url_for('viva') }}" class="btn btn-primary">🎓 Viva Guide →</a>
+  </div>
+
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+{% if summary %}
+<script>
+const chartData = {{ chart_data_json | safe }};
+
+window.addEventListener('load', () => {
+  const CYAN = '#38bdf8', CORAL = '#fb7185', GREEN = '#34d399', PURPLE = '#a78bfa';
+  const base = {
+    color: '#8ba3c7',
+    plugins: { legend: { labels: { color: '#8ba3c7', font: { family:"'DM Sans',sans-serif", size:12 } } } },
+    scales: {
+      x: { ticks: { color:'#4a6285' }, grid: { color:'rgba(99,179,237,0.07)' } },
+      y: { ticks: { color:'#4a6285' }, grid: { color:'rgba(99,179,237,0.07)' } },
+    },
+  };
+
+  // Line
+  if (chartData.line) {
+    const l = chartData.line;
+    const pointColors = l.statuses.map(s => s==='Anomaly' ? CORAL : GREEN);
+    new Chart(document.getElementById('lineChartFull'), {
+      type:'line',
+      data:{labels:l.labels,datasets:[{label:'Anomaly Score',data:l.scores,borderColor:CYAN,backgroundColor:CYAN+'15',borderWidth:1.5,fill:true,tension:0.35,pointRadius:l.statuses.map(s=>s==='Anomaly'?5:2),pointBackgroundColor:pointColors}]},
+      options:{...base},
+    });
+  }
+
+  // Scatter
+  if (chartData.scatter) {
+    const s = chartData.scatter;
+    new Chart(document.getElementById('scatterFull'), {
+      type:'scatter',
+      data:{datasets:[
+        {label:'Normal',data:s.normal.x.map((x,i)=>({x,y:s.normal.y[i]})),backgroundColor:GREEN+'99',pointRadius:4},
+        {label:'Anomaly',data:s.anomaly.x.map((x,i)=>({x,y:s.anomaly.y[i]})),backgroundColor:CORAL+'cc',pointRadius:7,pointStyle:'triangle'},
+      ]},
+      options:{...base,scales:{x:{...base.scales.x,title:{display:true,text:s.x_label,color:'#8ba3c7'}},y:{...base.scales.y,title:{display:true,text:s.y_label,color:'#8ba3c7'}}}},
+    });
+  }
+
+  // Pie
+  if (chartData.pie) {
+    const p = chartData.pie;
+    new Chart(document.getElementById('pieFull'), {
+      type:'doughnut',
+      data:{labels:p.labels,datasets:[{data:p.values,backgroundColor:[GREEN+'cc',CORAL+'cc'],borderColor:['#0d1525','#0d1525'],borderWidth:3,hoverOffset:8}]},
+      options:{cutout:'68%',plugins:{legend:{position:'bottom',labels:{color:'#8ba3c7',padding:16}}}},
+    });
+  }
+
+  // Multi-column distributions
+  if (chartData.distributions) {
+    const container = document.getElementById('distContainer');
+    Object.entries(chartData.distributions).forEach(([colName, values]) => {
+      const wrapper = document.createElement('div');
+      wrapper.style.cssText = 'background:var(--bg-card2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;';
+      wrapper.innerHTML = `<div style="font-size:.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em;">${colName}</div><canvas id="dist_${colName.replace(/\W/g,'_')}"></canvas>`;
+      container.appendChild(wrapper);
+
+      const bins=20, min=Math.min(...values), max=Math.max(...values), step=(max-min)/bins;
+      const counts=Array(bins).fill(0), labels=[];
+      for(let i=0;i<bins;i++) labels.push((min+i*step).toFixed(1));
+      values.forEach(v=>{ let idx=Math.floor((v-min)/step); if(idx>=bins)idx=bins-1; counts[idx]++; });
+
+      new Chart(wrapper.querySelector('canvas'), {
+        type:'bar',
+        data:{labels,datasets:[{label:colName,data:counts,backgroundColor:PURPLE+'88',borderColor:PURPLE,borderWidth:1,borderRadius:3}]},
+        options:{...base,plugins:{...base.plugins}},
+      });
+    });
+  }
+});
+</script>
+{% endif %}
+{% endblock %}

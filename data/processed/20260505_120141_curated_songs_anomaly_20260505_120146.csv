@@ -1,0 +1,67 @@
+song_name,artist,language,emotion_tag,target_mood,valence,energy,tempo,spotify_track_id,spotify_url,Anomaly_Score,Prediction,Status
+Nuvvante Naakishtam,Sid Sriram,Telugu,calming,happy,0.72,0.45,78,4Hv5q7YeGHQhzMJHKF1cA4,https://open.spotify.com/track/4Hv5q7YeGHQhzMJHKF1cA4,-0.4441,1,Normal
+Ee Raathale,Sid Sriram,Telugu,comforting,happy,0.65,0.4,72,5xK6BALMJsPh9nXdKCVNHr,https://open.spotify.com/track/5xK6BALMJsPh9nXdKCVNHr,-0.4535,1,Normal
+Adiga Adiga,Sid Sriram,Telugu,uplifting,happy,0.85,0.7,96,3UmaczJpikHgJFyBTAJVoz,https://open.spotify.com/track/3UmaczJpikHgJFyBTAJVoz,-0.4455,1,Normal
+Nee Neeli Kannullo,Armaan Malik,Telugu,hopeful,happy,0.8,0.65,90,2f4IYRsEk5GtgPjKRY3Aqk,https://open.spotify.com/track/2f4IYRsEk5GtgPjKRY3Aqk,-0.4297,1,Normal
+Saranga Dariya,Mangli,Telugu,uplifting,happy,0.88,0.82,108,6g0BdJLMjQS2b4mEqjGAo5,https://open.spotify.com/track/6g0BdJLMjQS2b4mEqjGAo5,-0.4449,1,Normal
+Buttabomma,Armaan Malik,Telugu,happy,happy,0.9,0.75,100,2NQLH84tqOeN3mQp2JJLZM,https://open.spotify.com/track/2NQLH84tqOeN3mQp2JJLZM,-0.5002,1,Normal
+Inkem Inkem,Sid Sriram,Telugu,comforting,happy,0.7,0.5,80,5XVEDdFBkTFsKyP9FWVaNx,https://open.spotify.com/track/5XVEDdFBkTFsKyP9FWVaNx,-0.4455,1,Normal
+Ye Sakkagunnave,Sid Sriram,Telugu,calming,happy,0.68,0.42,74,3qT4bUD1MaWpGrTwcvxL9s,https://open.spotify.com/track/3qT4bUD1MaWpGrTwcvxL9s,-0.4171,1,Normal
+Kadalalle,Sid Sriram,Telugu,hopeful,happy,0.78,0.6,88,1XmRPXCkGfipBGCUG6ETKP,https://open.spotify.com/track/1XmRPXCkGfipBGCUG6ETKP,-0.4596,1,Normal
+Naalo Chilipi Kala,Armaan Malik,Telugu,uplifting,happy,0.86,0.72,102,7LpWX3MjQS5b4mEqjGZBn1,https://open.spotify.com/track/7LpWX3MjQS5b4mEqjGZBn1,-0.4355,1,Normal
+Samajavaragamana,Sid Sriram,Telugu,calming,happy,0.75,0.48,82,0pMrAPbTAJVjlQcY5y8HAm,https://open.spotify.com/track/0pMrAPbTAJVjlQcY5y8HAm,-0.4765,1,Normal
+Ninnu Kori,Sid Sriram,Telugu,comforting,happy,0.67,0.44,76,4ZpWX3MjQS5b4mEqjGABc2,https://open.spotify.com/track/4ZpWX3MjQS5b4mEqjGABc2,-0.4449,1,Normal
+Oo Antava,Indravathi Chauhan,Telugu,uplifting,happy,0.87,0.85,110,1yTfNkENsEIxc9nRLFnf8G,https://open.spotify.com/track/1yTfNkENsEIxc9nRLFnf8G,-0.4725,1,Normal
+Rowdy Baby,Dhanush & Dhee,Telugu,happy,happy,0.92,0.88,114,6T3fNBotG0GGqvqvMBM3Ar,https://open.spotify.com/track/6T3fNBotG0GGqvqvMBM3Ar,-0.5406,1,Normal
+Srivalli,Sid Sriram,Telugu,uplifting,happy,0.82,0.68,94,3UX6gJzC0b9TwvPyNQ0fJM,https://open.spotify.com/track/3UX6gJzC0b9TwvPyNQ0fJM,-0.4379,1,Normal
+Jai Jai Shivshankar,Vishal-Shekhar,Hindi,calming,happy,0.62,0.38,70,3nVSB7uEqxOlegwZtPwfh1,https://open.spotify.com/track/3nVSB7uEqxOlegwZtPwfh1,-0.5136,1,Normal
+Raataan Lambiyan,Jubin Nautiyal,Hindi,comforting,happy,0.7,0.45,80,1io6VECwrpL2QgjSYNR6B4,https://open.spotify.com/track/1io6VECwrpL2QgjSYNR6B4,-0.4193,1,Normal
+Tujhe Kitna Chahne Lage,Arijit Singh,Hindi,comforting,happy,0.68,0.42,76,5fMkP2GkiuXeHkRFSvKFaW,https://open.spotify.com/track/5fMkP2GkiuXeHkRFSvKFaW,-0.4205,1,Normal
+Kesariya,Arijit Singh,Hindi,hopeful,happy,0.8,0.62,92,3b6rKaa3453dNjZKbYDEAT,https://open.spotify.com/track/3b6rKaa3453dNjZKbYDEAT,-0.4352,1,Normal
+Kahun Kya,Arijit Singh,Hindi,calming,happy,0.65,0.38,68,2Qv3G7Z9hJTjA6jQBYVfnL,https://open.spotify.com/track/2Qv3G7Z9hJTjA6jQBYVfnL,-0.491,1,Normal
+Tera Ban Jaunga,Akhil Sachdeva,Hindi,comforting,happy,0.72,0.46,82,0LtMhNbhJFyBTAJVjlQ5c8,https://open.spotify.com/track/0LtMhNbhJFyBTAJVjlQ5c8,-0.4454,1,Normal
+Lut Gaye,Jubin Nautiyal,Hindi,hopeful,happy,0.82,0.65,94,4gJzC0b9TwvPyNQ0fJMUc7,https://open.spotify.com/track/4gJzC0b9TwvPyNQ0fJMUc7,-0.426,1,Normal
+Hawayein,Arijit Singh,Hindi,calming,happy,0.66,0.4,72,5vNTfFJF3rV2JlFZXNE8XG,https://open.spotify.com/track/5vNTfFJF3rV2JlFZXNE8XG,-0.4274,1,Normal
+Pal,Arijit Singh,Hindi,comforting,happy,0.69,0.43,78,7bPEVFySYJ1OAPB9GC4JDs,https://open.spotify.com/track/7bPEVFySYJ1OAPB9GC4JDs,-0.4391,1,Normal
+Dil Diyan Gallan,Atif Aslam,Hindi,hopeful,happy,0.77,0.58,88,2kQvbBKRQ4m51eP8JTjkYr,https://open.spotify.com/track/2kQvbBKRQ4m51eP8JTjkYr,-0.4746,1,Normal
+Kho Gaye Hum Kahan,Jasleen Royal,Hindi,hopeful,happy,0.83,0.68,96,1rM9BaJXSbHzXN5QgFmW3K,https://open.spotify.com/track/1rM9BaJXSbHzXN5QgFmW3K,-0.4324,1,Normal
+Taare Ginn,Jasleen Royal,Hindi,uplifting,happy,0.86,0.72,102,4xM5bLOqRT1c2N6Z9iYQp8,https://open.spotify.com/track/4xM5bLOqRT1c2N6Z9iYQp8,-0.4355,1,Normal
+Baarishein,Anuv Jain,Hindi,comforting,happy,0.64,0.38,70,3cN7P0sQgH8bZ1o4JkGXK2,https://open.spotify.com/track/3cN7P0sQgH8bZ1o4JkGXK2,-0.458,1,Normal
+Shayad,Arijit Singh,Hindi,calming,happy,0.63,0.36,66,5YUKfGbH3kQ9cM2sZX8vPr,https://open.spotify.com/track/5YUKfGbH3kQ9cM2sZX8vPr,-0.5499,1,Normal
+Mere Meherbaan,Jubin Nautiyal,Hindi,hopeful,happy,0.79,0.6,90,6pRbW4cHJCL7dN1tGo2QmY,https://open.spotify.com/track/6pRbW4cHJCL7dN1tGo2QmY,-0.4464,1,Normal
+Dildarian,Satinder Sartaaj,Punjabi,calming,happy,0.68,0.42,74,3MnKP0uLbH9dZ2o5JkVXR4,https://open.spotify.com/track/3MnKP0uLbH9dZ2o5JkVXR4,-0.4171,1,Normal
+Iik Vaari Aa,Arijit Singh,Punjabi,comforting,happy,0.66,0.4,72,4NoPQ1tMbI9eZ3p6KlGYS5,https://open.spotify.com/track/4NoPQ1tMbI9eZ3p6KlGYS5,-0.4274,1,Normal
+Ik Tara,Rabbi Shergill,Punjabi,hopeful,happy,0.8,0.62,90,5LoQR2uNbJ9fZ4q7LmHZT6,https://open.spotify.com/track/5LoQR2uNbJ9fZ4q7LmHZT6,-0.4176,1,Normal
+Sifar,Gurdas Maan,Punjabi,calming,happy,0.64,0.38,68,6MpRS3vOcK9gZ5r8MnIZU7,https://open.spotify.com/track/6MpRS3vOcK9gZ5r8MnIZU7,-0.4842,1,Normal
+Ekam,Gurdas Maan,Punjabi,calming,happy,0.62,0.36,66,7NqST4wPdL9hZ6s9NoJZV8,https://open.spotify.com/track/7NqST4wPdL9hZ6s9NoJZV8,-0.5582,1,Normal
+Akhiyan,B Praak,Punjabi,comforting,happy,0.7,0.44,80,8OrTU5xQeM0iZ7t0OpKZW9,https://open.spotify.com/track/8OrTU5xQeM0iZ7t0OpKZW9,-0.4209,1,Normal
+Qismat,B Praak,Punjabi,comforting,happy,0.67,0.42,74,9PsUV6yRfN1jZ8u1PqLZX0,https://open.spotify.com/track/9PsUV6yRfN1jZ8u1PqLZX0,-0.4363,1,Normal
+Naah,Harrdy Sandhu,Punjabi,uplifting,happy,0.87,0.8,108,0QtVW7zSgO2kZ9v2QrMZY1,https://open.spotify.com/track/0QtVW7zSgO2kZ9v2QrMZY1,-0.4459,1,Normal
+Laembadgini,Diljit Dosanjh,Punjabi,uplifting,happy,0.89,0.84,112,1RuWX8zThP3lZ0w3RsNZZ2,https://open.spotify.com/track/1RuWX8zThP3lZ0w3RsNZZ2,-0.4633,1,Normal
+Proper Patola,Diljit Dosanjh,Punjabi,happy,happy,0.91,0.87,116,2SvXY9zUiQ4mZ1x4StOZA3,https://open.spotify.com/track/2SvXY9zUiQ4mZ1x4StOZA3,-0.5189,1,Normal
+Rifle,Diljit Dosanjh,Punjabi,uplifting,happy,0.85,0.78,106,3TwYZ0zVjR5nZ2y5TuPZB4,https://open.spotify.com/track/3TwYZ0zVjR5nZ2y5TuPZB4,-0.4686,1,Normal
+Lover,Diljit Dosanjh,Punjabi,hopeful,happy,0.83,0.7,98,4UxZA1zWkS6oZ3z6UvQZC5,https://open.spotify.com/track/4UxZA1zWkS6oZ3z6UvQZC5,-0.4569,1,Normal
+GOAT,Diljit Dosanjh,Punjabi,uplifting,happy,0.88,0.83,110,5VyZB2zXlT7pZ4z7VwRZD6,https://open.spotify.com/track/5VyZB2zXlT7pZ4z7VwRZD6,-0.4488,1,Normal
+Feelin Good,Chris Martin,English,calming,happy,0.72,0.48,80,5ZzZC3zYmU8qZ5z8WxSZE7,https://open.spotify.com/track/5ZzZC3zYmU8qZ5z8WxSZE7,-0.4421,1,Normal
+Here Comes the Sun,The Beatles,English,hopeful,happy,0.88,0.62,126,6AzAD4zZnV9rZ6z9XySZF8,https://open.spotify.com/track/6AzAD4zZnV9rZ6z9XySZF8,-0.5136,1,Normal
+Weightless,Marconi Union,English,calming,happy,0.55,0.22,60,5huGBGmqpFhQcEVoZa3Ps8,https://open.spotify.com/track/5huGBGmqpFhQcEVoZa3Ps8,-0.7623,-1,Anomaly
+Better Days,OneRepublic,English,hopeful,happy,0.82,0.66,94,7CwF3lNFxBvZkK3GhX0vHl,https://open.spotify.com/track/7CwF3lNFxBvZkK3GhX0vHl,-0.4255,1,Normal
+Somewhere Only We Know,Keane,English,comforting,happy,0.7,0.5,84,3DWxR5b3GrNLiVf3YHyIqr,https://open.spotify.com/track/3DWxR5b3GrNLiVf3YHyIqr,-0.4752,1,Normal
+Fix You,Coldplay,English,comforting,happy,0.64,0.38,70,7LVHVU3tWfcxj5aiPFEW4Q,https://open.spotify.com/track/7LVHVU3tWfcxj5aiPFEW4Q,-0.458,1,Normal
+Yellow,Coldplay,English,hopeful,happy,0.8,0.63,90,3AJwUDP919kvQ9QcozQPxg,https://open.spotify.com/track/3AJwUDP919kvQ9QcozQPxg,-0.4204,1,Normal
+The Scientist,Coldplay,English,comforting,happy,0.66,0.4,74,75JFxkI2816DGxi8friV9m,https://open.spotify.com/track/75JFxkI2816DGxi8friV9m,-0.4396,1,Normal
+Clocks,Coldplay,English,hopeful,happy,0.79,0.62,131,0BCPKOYdS2jbQ5FvnOQjda,https://open.spotify.com/track/0BCPKOYdS2jbQ5FvnOQjda,-0.5614,1,Normal
+Happy,Pharrell Williams,English,happy,happy,0.96,0.81,160,60nZcImufyMA1MKQY3dcCH,https://open.spotify.com/track/60nZcImufyMA1MKQY3dcCH,-0.6435,-1,Anomaly
+Walking on Sunshine,Katrina & The Waves,English,happy,happy,0.94,0.85,138,05wIkICIbBBsn2FzBJUmAW,https://open.spotify.com/track/05wIkICIbBBsn2FzBJUmAW,-0.6047,-1,Anomaly
+Shake It Off,Taylor Swift,English,uplifting,happy,0.91,0.8,160,5fy0X0JmZRZnVa2UEicIOc,https://open.spotify.com/track/5fy0X0JmZRZnVa2UEicIOc,-0.5708,1,Normal
+Good as Hell,Lizzo,English,uplifting,happy,0.9,0.74,154,3Kkjo3cT83cw06on3BMPXI,https://open.spotify.com/track/3Kkjo3cT83cw06on3BMPXI,-0.5566,1,Normal
+Uptown Funk,Mark Ronson ft Bruno Mars,English,uplifting,happy,0.89,0.85,115,32OlwWS223PasGVfari7gF,https://open.spotify.com/track/32OlwWS223PasGVfari7gF,-0.4687,1,Normal
+Best Day of My Life,American Authors,English,uplifting,happy,0.88,0.82,147,7527EqhTEBKSuHPT3Xt0Xo,https://open.spotify.com/track/7527EqhTEBKSuHPT3Xt0Xo,-0.5266,1,Normal
+Can't Stop the Feeling,Justin Timberlake,English,happy,happy,0.93,0.79,113,1WkMMavIMc4JZ8cfMkaokA,https://open.spotify.com/track/1WkMMavIMc4JZ8cfMkaokA,-0.5133,1,Normal
+Lean on Me,Bill Withers,English,comforting,happy,0.71,0.52,76,2mfmsPDJBMUEC3KPdMtKFs,https://open.spotify.com/track/2mfmsPDJBMUEC3KPdMtKFs,-0.4896,1,Normal
+Don't Stop Believin,Journey,English,hopeful,happy,0.85,0.75,119,4bHsxqR3GMrXTxEPLuK5ue,https://open.spotify.com/track/4bHsxqR3GMrXTxEPLuK5ue,-0.4793,1,Normal
+Three Little Birds,Bob Marley,English,calming,happy,0.87,0.62,150,6IA8E2Q5ttcpbuahIejO74,https://open.spotify.com/track/6IA8E2Q5ttcpbuahIejO74,-0.5332,1,Normal
+What a Wonderful World,Louis Armstrong,English,calming,happy,0.86,0.44,93,29U7stRjqHU6rMiS8BfaI9,https://open.spotify.com/track/29U7stRjqHU6rMiS8BfaI9,-0.5535,1,Normal
+Count on Me,Bruno Mars,English,comforting,happy,0.84,0.58,152,56k2ztFw7fGASPxMMGXKEH,https://open.spotify.com/track/56k2ztFw7fGASPxMMGXKEH,-0.5766,-1,Anomaly
+Beautiful Day,U2,English,uplifting,happy,0.86,0.77,137,0jSAOCZrFHgEjPb4TsEuX4,https://open.spotify.com/track/0jSAOCZrFHgEjPb4TsEuX4,-0.5225,1,Normal
+Lovely Day,Bill Withers,English,uplifting,happy,0.88,0.68,96,2RlgNHKcydI9sayD2Df2xp,https://open.spotify.com/track/2RlgNHKcydI9sayD2Df2xp,-0.4614,1,Normal

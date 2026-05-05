@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Results — AnomalyAI{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › Results</div>
+    <h2>Detection Results</h2>
+    <p>Anomaly detection completed. Review the summary, charts, and download the labelled CSV.</p>
+  </div>
+
+  <!-- ── Summary Metrics ──────────────────────────────── -->
+  <div class="metric-grid fade-up">
+    <div class="metric-card" style="--metric-color:#38bdf8">
+      <div class="metric-label">Total Records</div>
+      <div class="metric-value">{{ summary.total_rows }}</div>
+      <div class="metric-sub">Rows analysed</div>
+      <div class="metric-icon">📊</div>
+      <div class="stat-bar-wrap"><div class="stat-bar"><div class="stat-bar-fill" data-width="100" style="width:0%"></div></div></div>
+    </div>
+    <div class="metric-card" style="--metric-color:#34d399">
+      <div class="metric-label">Normal Records</div>
+      <div class="metric-value glow-cyan">{{ summary.normal_count }}</div>
+      <div class="metric-sub">{{ ((summary.normal_count / summary.total_rows) * 100) | round(1) }}% of total</div>
+      <div class="metric-icon">✅</div>
+      <div class="stat-bar-wrap"><div class="stat-bar"><div class="stat-bar-fill" data-width="{{ ((summary.normal_count / summary.total_rows) * 100) | round(1) }}" style="width:0%;background:var(--green)"></div></div></div>
+    </div>
+    <div class="metric-card" style="--metric-color:#fb7185">
+      <div class="metric-label">Anomalies Found</div>
+      <div class="metric-value glow-red">{{ summary.anomaly_count }}</div>
+      <div class="metric-sub">{{ summary.anomaly_percentage }}% of total</div>
+      <div class="metric-icon">🚨</div>
+      <div class="stat-bar-wrap"><div class="stat-bar"><div class="stat-bar-fill" data-width="{{ summary.anomaly_percentage }}" style="width:0%;background:var(--coral)"></div></div></div>
+    </div>
+    <div class="metric-card" style="--metric-color:#a78bfa">
+      <div class="metric-label">Algorithm</div>
+      <div class="metric-value" style="font-size:1.1rem;padding-top:4px;">{{ summary.algorithm_used }}</div>
+      <div class="metric-sub">Contamination: {{ summary.contamination }}</div>
+      <div class="metric-icon">🤖</div>
+    </div>
+  </div>
+
+  <!-- ── Download + Columns Used ──────────────────────── -->
+  <div class="card fade-up" style="margin-bottom:2rem;">
+    <div class="card-header">
+      <div class="card-title">📄 Processed Output</div>
+      {% if output_file %}
+      <a href="{{ url_for('download', filename=output_file) }}" class="btn btn-success btn-sm">
+        ⬇ Download Labelled CSV
+      </a>
+      {% endif %}
+    </div>
+    <div class="pill-row">
+      <div class="pill" style="color:var(--text-muted);font-size:0.78rem;">Features used:</div>
+      {% for col in summary.columns_used %}
+      <div class="pill"><div class="dot"></div>{{ col }}</div>
+      {% endfor %}
+    </div>
+    <p style="font-size:0.83rem;color:var(--text-secondary);">
+      Output CSV includes original columns plus <code>Anomaly_Score</code>, <code>Prediction</code> (1 / -1), and <code>Status</code> (Normal / Anomaly).
+    </p>
+  </div>
+
+  <!-- ── Charts ────────────────────────────────────────── -->
+  <div class="grid-2 fade-up" style="margin-bottom:2rem;">
+    <div class="card">
+      <div class="card-header"><div class="card-title">🔵 Scatter Plot — Normal vs Anomaly</div></div>
+      <div class="chart-wrap"><canvas id="scatterChart" height="260"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🍩 Distribution — Normal vs Anomaly</div></div>
+      <div class="chart-wrap"><canvas id="pieChart" height="260"></canvas></div>
+    </div>
+  </div>
+  <div class="grid-2 fade-up delay-1" style="margin-bottom:2rem;">
+    <div class="card">
+      <div class="card-header"><div class="card-title">📈 Anomaly Score — Line Chart</div></div>
+      <div class="chart-wrap"><canvas id="lineChart" height="220"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">📊 Feature Distribution</div></div>
+      <div class="chart-wrap"><canvas id="distChart" height="220"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── Result Table ──────────────────────────────────── -->
+  <div class="card fade-up delay-2" style="margin-bottom:3rem;">
+    <div class="card-header">
+      <div class="card-title">📋 Result Table <span style="font-weight:400;color:var(--text-muted);font-size:0.82rem;">(top 200 rows)</span></div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="tableSearch" placeholder="Search…" class="form-control" style="width:180px;padding:6px 10px;font-size:0.82rem;" oninput="filterTable(this.value)">
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="resultTable">
+        <thead>
+          <tr>
+            {% for col in result_columns %}
+            <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in result_table %}
+          <tr class="{{ 'anomaly-row' if row.get('Status') == 'Anomaly' }}">
+            {% for col in result_columns %}
+            <td>
+              {% if col == 'Status' %}
+                {% if row[col] == 'Anomaly' %}
+                  <span class="badge badge-anomaly">🚨 Anomaly</span>
+                {% else %}
+                  <span class="badge badge-normal">✅ Normal</span>
+                {% endif %}
+              {% elif col == 'Prediction' %}
+                <span style="color:{{ 'var(--coral)' if row[col]|string == '-1' else 'var(--green)' }};font-weight:600;">{{ row[col] }}</span>
+              {% else %}
+                {{ row[col] }}
+              {% endif %}
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:3rem;" class="fade-up">
+    <a href="{{ url_for('analytics') }}" class="btn btn-primary">📊 Deep Analytics →</a>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">← Re-configure</a>
+    {% if output_file %}
+    <a href="{{ url_for('download', filename=output_file) }}" class="btn btn-success">⬇ Download CSV</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+  const chartData = {{ chart_data_json | safe }};
+  window.addEventListener('load', () => initCharts(chartData));
+
+  function filterTable(query) {
+    const rows = document.querySelectorAll('#resultTable tbody tr');
+    const q = query.toLowerCase();
+    rows.forEach(row => {
+      row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+  }
+</script>
+{% endblock %}

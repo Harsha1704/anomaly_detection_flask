@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Upload Dataset — AnomalyAI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-header fade-up">
+    <div class="breadcrumb">AnomalyAI › Upload Dataset</div>
+    <h2>Upload Your Dataset</h2>
+    <p>Drop a CSV file below. The system will auto-detect numeric columns and prepare them for detection.</p>
+  </div>
+
+  <div class="grid-2">
+    <!-- Upload form -->
+    <div class="card fade-up">
+      <div class="card-header">
+        <div class="card-title">📂 Dataset Upload</div>
+        <span class="badge badge-info">CSV only</span>
+      </div>
+
+      <form method="POST" enctype="multipart/form-data" id="uploadForm" action="{{ url_for('upload') }}">
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" name="file" id="fileInput" accept=".csv" />
+          <div class="upload-icon">☁️</div>
+          <h3>Drag & Drop your CSV file here</h3>
+          <p>or click to browse from your computer</p>
+          <div id="fileName" style="color:var(--cyan);font-weight:600;font-size:0.88rem;min-height:1.2em;"></div>
+        </div>
+
+        <div style="margin-top:1.5rem;display:flex;gap:10px;flex-wrap:wrap;">
+          <button type="submit" class="btn btn-primary" onclick="document.getElementById('loadingOverlay').classList.add('active')">
+            ⚡ Upload &amp; Analyse
+          </button>
+          <a href="{{ url_for('reset') }}" class="btn btn-danger btn-sm" style="align-self:center;">🔄 Reset Session</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Info panel -->
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div class="card fade-up delay-1">
+        <div class="card-title" style="margin-bottom:1rem;">📋 Requirements</div>
+        <ul class="feature-list">
+          <li><span class="fi">✅</span><div><strong>Format</strong><span>CSV (.csv) files only, UTF-8 encoding preferred.</span></div></li>
+          <li><span class="fi">✅</span><div><strong>Size</strong><span>Maximum 16 MB. Minimum 5 rows.</span></div></li>
+          <li><span class="fi">✅</span><div><strong>Columns</strong><span>At least one numeric column required for detection.</span></div></li>
+          <li><span class="fi">✅</span><div><strong>Headers</strong><span>First row must be column headers.</span></div></li>
+        </ul>
+      </div>
+
+      <div class="card fade-up delay-2">
+        <div class="card-title" style="margin-bottom:1rem;">🧪 No Dataset? Use Ours!</div>
+        <p style="font-size:0.88rem;color:var(--text-secondary);margin-bottom:1rem;">
+          We generated a sample industrial sensor anomaly dataset with 315 rows —
+          Temperature, Pressure, Vibration, and Current readings with ~5% injected anomalies.
+        </p>
+        <a href="{{ url_for('sample_download') }}" class="btn btn-secondary btn-sm">
+          ⬇ Download Sample CSV
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
