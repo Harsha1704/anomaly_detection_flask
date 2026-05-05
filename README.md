@@ -90,7 +90,7 @@ anomaly_detection_flask/
 
 ### 1. Clone the repository
 ```powershell
-git clone https://github.com/YOUR_USERNAME/anomaly_detection_flask.git
+git clone https://github.com/Harsha1704/anomaly_detection_flask.git
 cd anomaly_detection_flask
 ```
 
@@ -165,15 +165,6 @@ The downloaded CSV includes all original columns plus:
 - Docker containerisation for easy deployment
 
 ---
-
-## 👤 Author
-
-**Your Name**
-- GitHub: [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/YOUR_PROFILE)
-
----
-
 ## 📄 License
 
 MIT License — free to use for educational and portfolio purposes.
